@@ -9,7 +9,7 @@ function LoginForm() {
     const handleSubmit = async () => { 
       //TODO: É necessário configurar essa função corretamente após a construção da autenticação no back
         try {
-          const response = await axios.get('https://proton-1710414195673.azurewebsites.net/municipes', {withCredentials: trye});
+          const response = await axios.get('https://proton-1710414195673.azurewebsites.net/municipes', {withCredentials: true});
           
           console.log(response.data); 
           alert('Dados enviados com sucesso!');
