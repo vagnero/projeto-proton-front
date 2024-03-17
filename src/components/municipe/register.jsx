@@ -55,7 +55,7 @@ function RegisterForm() {
     e.preventDefault();
     const formattedDate = moment(formData.data_nascimento).format('YYYY-MM-DD');
     try {
-      const response = await axios.post('https://proton-1710414195673.azurewebsites.net/municipes', { withCredentials: true }, {
+      const response = await axios.post('https://proton-1710414195673.azurewebsites.net/municipes', {
         ...formData, // Inclua todos os dados do formData
         data_nascimento: formattedDate // Substitua o campo data_nascimento formatado
       });
