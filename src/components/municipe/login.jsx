@@ -1,36 +1,45 @@
-import React, {useState, useEffect, ChangeEvent, FormEvent, ReactNode} from "react"
-
+import React from "react";
+import { useNavigate } from "react-router-dom";
+import axios from "axios";
+//Função que excecuta o login, contendo configurações do login e o formulário HTML
 function LoginForm() {
-    const [email, setEmail] = useState('');
-    const [senha, setSenha] = useState('');
+    const navigate = useNavigate();
 
-    const handleSubmit = (event) => {
-        event.preventDefault();
-        // Aqui você pode adicionar a lógica para autenticar o usuário com o username e password fornecidos.
-        console.log('Username:', email);
-        console.log('Password:', senha);
-    };
-    return (
-        <form onSubmit={handleSubmit}>
-            <div>
-                <label>Username:</label>
-                <input
-                    type="email"
-                    value={email}
-                    onChange={(event) => setEmail(event.target.value)}
-                />
-            </div>
-            <div>
-                <label>Password:</label>
-                <input
-                    type="password"
-                    value={senha}
-                    onChange={(event) => setSenha(event.target.value)}
-                />
-            </div>
-            <button type="submit">Login</button>
-        </form>
-    );
+    //Função assíncrona que lida com a parte de conexão com o backend, requerindo uma resposta do back
+    const handleSubmit = async () => { 
+      //TODO: É necessário configurar essa função corretamente após a construção da autenticação no back
+        try {
+          const response = await axios.get('https://proton-1710414195673.azurewebsites.net/municipes');
+          
+          console.log(response.data); 
+          alert('Dados enviados com sucesso!');
+        } catch (error) {
+          console.error('Erro ao enviar os dados:', error);
+        }
+      };
+
+  //Função responsável para redirecionar para o /cadastro page
+  const handleCadastroClick = () => {
+    navigate('/cadastro'); // Redireciona para a página de cadastro
+  };
+
+  //É retornado o formulário html abaixo
+  return (
+    <div>
+      <div>
+        <label>Login:</label>
+        <input type="text" />
+      </div>
+      <div>
+        <label>Senha:</label>
+        <input type="password" />
+      </div>
+      <button type="submit" onClick={handleSubmit} >Login</button>
+      <button type="button" onClick={handleCadastroClick}>
+        Cadastrar-se
+      </button>
+      </div>
+  );
 }
 
 export default LoginForm;
